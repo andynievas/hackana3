@@ -113,15 +113,17 @@
     z-index: 2;
 }
 
-.movie-card:hover .visible-area {
-    transform: scale(1.1);
-}
-
 .movie-card:hover .info {
     /* opacity: 1; */
     display: flex;
 }
 
+
+@media (min-width: 767px) {
+    .movie-card:hover .visible-area {
+        transform: scale(1.1);
+    }
+}
 
 @media (max-width: 767px) {
     .info {
