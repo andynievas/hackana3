@@ -28,18 +28,6 @@ function App() {
   return (
     <div className="App text-light">
 
-      <Routes>
-        <Route path="/" element={
-          <header className="d-none bg-primary-dark py-2 py-xxl-5" >{ /* Convertir en un componente */}
-            <div className="container jumbotron text-light py-5">
-              <h2 className="text-center" >Tus peliculas favoritas</h2>
-              <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-              <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            </div>
-          </header>
-        } />
-      </Routes>
-
       <Navbar />
 
       <Routes>

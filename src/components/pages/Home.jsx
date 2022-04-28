@@ -1,56 +1,43 @@
 
 import MoviesList from "../moviesList";
 import { useEffect, useState } from "react";
-
+import { Spinner } from "react-bootstrap";
 import fetchMovies from "../../fetchMovies";
-// tengo que hacer ahora : movies en el home
-
-/*<div className="col-md-3 d-none d- lg -flex flex-column px-5">
-    <h4>Estrenos</h4>
-    <div className="my-2" >
-        { movies && <Movie movie={ movies[0] } onClick={ handleShow } info={ false } /> }
-    </div>
-    <div className="my-2" >
-        { movies && <Movie movie={ movies[1] } onClick={ handleShow } info={ false } /> }
-    </div>
-</div>
+import InfiniteScroll from "../InfiniteScroll";
 
 
-*/
+function Home() {
 
-function Home(){
-
-    const [movies, setMovies] = useState( [] );
-    const [page, setPage] = useState( 1 );
-    const nextPage = ()=> setPage( prev => prev + 1 );
+    const [movies, setMovies] = useState([]);
+    const [page, setPage] = useState(1);
+    const [showSpineer, setShowSpineer] = useState(true);
 
 
-    useEffect( ()=>{
+    useEffect(() => {
         (async function () {
-            const data = await fetchMovies( "discover", 0, page );
-            window.addEventListener( "scroll", handleScroll );
+            setShowSpineer(true);
+            const data = await fetchMovies("discover", 0, page);
             console.log("Dentro del useEffect");
-            if( page === 1 ){
-                setMovies( data );
-            }else setMovies( [ ...movies, ...data] );
+            if (page === 1) {
+                setMovies(data);
+            } else setMovies([...movies, ...data]);
+            setShowSpineer(false);
         })();
-        
-        return ()=> window.removeEventListener( "scroll", handleScroll );
 
-    } , [page] );
+    }, [page]);
 
-    const handleScroll = ()=> {
-        console.log("HANDLE SCROLL");
-        if( document.body.clientHeight < (window.scrollY + window.innerHeight) ){
-            window.removeEventListener( "scroll", handleScroll );
-            setTimeout( ()=>{
-                window.addEventListener( "scroll", handleScroll );
-            }, 1000);
-            nextPage();
-        }
-    }
+    const handleScroll = () => setPage(prev => prev + 1);
 
     return <div className="container mt-5" id="main-content" >
+        <InfiniteScroll action={handleScroll} interval={2000} />
+
+        <header className="d-none bg-primary-dark py-2 py-xxl-5" >{ /* Convertir en un componente */}
+            <div className="container jumbotron text-light py-5">
+                <h2 className="text-center" >Tus peliculas favoritas</h2>
+                <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+            </div>
+        </header>
 
         <div className="d-flex align-items-start flex-wrap">
             <h3 className="" >Peliculas Online</h3>
@@ -61,6 +48,11 @@ function Home(){
 
         <div style={{ minHeight: "100px" }} >
             <MoviesList movies={movies} />
+            {showSpineer && <div className="d-flex justify-content-center my-5" >
+                <Spinner animation="border" role="status" >
+                    <span className="visually-hidden">Loading...</span>
+                </Spinner>
+            </div>}
         </div>
 
     </div>
