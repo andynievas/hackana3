@@ -1,40 +1,43 @@
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import logo from "../../assets/app-icon.jpg";
+import "./Movie.css";
 
-import key from "../../data/key";
+const key = process.env.REACT_APP_API_KEY;
 
-function Movie({ movieID }){
-    
-    const urlBase = `https://api.themoviedb.org/3/movie/${"833425"}?api_key=${key}`;
+function Movie() {
 
     const [movie, setMovie] = useState({});
+    const params = useParams();
+    const urlBase = `https://api.themoviedb.org/3/movie/${params.id}?api_key=${key}`;
 
-    useEffect( ()=>{
-        async function getMovie(){
-            const response = await fetch( urlBase );
+    useEffect(() => {
+        async function getMovie() {
+            const response = await fetch(urlBase);
             const data = await response.json();
-            console.log( data );
-            setMovie( data );
+            console.log(data);
+            setMovie(data);
         }
         getMovie();
-    } , [] );
+    }, []);
 
-    const imgURL = movie.poster_path && `https://image.tmdb.org/t/p/w500${ movie.poster_path }`;
+    const mainImgURL = movie.poster_path ?
+        `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        : logo;
 
-    const backImgURL = movie.backdrop_path ?
-        `https://image.tmdb.org/t/p/original${ movie.backdrop_path }`
+    const backgroundImgURL = movie.backdrop_path ?
+        `https://image.tmdb.org/t/p/original${movie.backdrop_path}`
         : logo;
 
 
     return <div className="container" >
-    
-        <div className="imgFondo" style={{ backgroundImage: `url(${ backImgURL })` }} >
+
+        <div id="backdrop-path" style={{ backgroundImage: `url(${backgroundImgURL})` }} >
 
             <div className="blur-sm" >
-                <img className="w-50" src={imgURL} alt="andy" />
-                <img className="w-100 d-none" src={backImgURL} alt="andy" />
-                <h3>{ movie.title }</h3>
+                <img id="poster-path" src={mainImgURL} alt={`Image of ${movie.title}`} />
+                <h3>{movie.title}</h3>
             </div>
 
         </div>

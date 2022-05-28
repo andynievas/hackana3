@@ -21,7 +21,7 @@ export default function Movie({ movie }) {
 
     return <div className="movie-card h-100" >
 
-        <Link to="/movie" className="w-100 text-light text-decoration-none" >
+        <Link to={`/movie/${movie.id}`} className="w-100 text-light text-decoration-none" >
             <div className="visible-area h-100" >
                 <img className="w-100 h-100 rounded shadow" src={imgURL} alt={movie.title} onLoad={() => setLoading(false)} />
                 <span className="yearOnImage small fw-bold bg-primary px-2 rounded-lg" >{movie.release_date && movie.release_date.substring(0, 4)}</span>
@@ -40,7 +40,7 @@ export default function Movie({ movie }) {
                     <span className="text-warning fw-bold" ><span className="lead fw-bold" >{movie.vote_average && movie.vote_average}/</span><span className="small" >10</span></span>
                     <span className="mx-2 small" >{movie.release_date && movie.release_date.substring(0, 4)}</span>
                     <span className="text-dark small fw-bold bg-warning px-1 rounded" >HD</span>
-                    <p className="overview fw-bolder mt-2 mb-0 p-0" >{movie.overview ? movie.overview : "No hay descripcion"}</p>
+                    <p className="overview mt-2 mb-0 p-0" >{movie.overview ? movie.overview : "No hay descripcion"}</p>
                 </div>
 
             </div>

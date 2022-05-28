@@ -34,7 +34,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<FilterByTitle />} />
         <Route path="/filter-by-rating" element={<FilterByRating />} />
-        <Route path="/movie" element={<Movie movieID={"andy"} />} />
+        <Route path="/movie/:id" element={<Movie />} />
       </Routes>
 
       <footer className="my-5 py-5" >

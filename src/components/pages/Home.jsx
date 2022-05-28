@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Spinner } from "react-bootstrap";
 import fetchMovies from "../../fetchMovies";
 import InfiniteScroll from "../InfiniteScroll";
+import Carousel from "../Carousel";
 
 
 function Home() {
@@ -28,34 +29,30 @@ function Home() {
 
     const handleScroll = () => setPage(prev => prev + 1);
 
-    return <div className="container mt-5" id="main-content" >
+    return <>
         <InfiniteScroll action={handleScroll} interval={2000} />
-
-        <header className="d-none bg-primary-dark py-2 py-xxl-5" >{ /* Convertir en un componente */}
-            <div className="container jumbotron text-light py-5">
-                <h2 className="text-center" >Tus peliculas favoritas</h2>
-                <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-            </div>
+        <header className="bg-primary-dark" >{ /* Convertir en un componente */}
+            <Carousel movies={movies.filter((item, index) => index < 5)} />
         </header>
 
-        <div className="d-flex align-items-start flex-wrap">
-            <h3 className="" >Peliculas Online</h3>
-            <button className="btn btn-sm text-light ms-3" >Ultimas</button>
-            <button className="btn btn-sm text-light ms-3" >Estrenos</button>
-            <button className="btn btn-sm text-light ms-3" >Mas vistas</button>
-        </div>
+        <div className="container mt-5" id="main-content" >
+            <div className="d-flex align-items-start flex-wrap">
+                <h3 className="" >Peliculas Online</h3>
+                <button className="btn btn-sm text-light ms-3" >Ultimas</button>
+                <button className="btn btn-sm text-light ms-3" >Estrenos</button>
+                <button className="btn btn-sm text-light ms-3" >Mas vistas</button>
+            </div>
 
-        <div style={{ minHeight: "100px" }} >
-            <MoviesList movies={movies} />
-            {showSpineer && <div className="d-flex justify-content-center my-5" >
-                <Spinner animation="border" role="status" >
-                    <span className="visually-hidden">Loading...</span>
-                </Spinner>
-            </div>}
+            <div style={{ minHeight: "100px" }} >
+                <MoviesList movies={movies} />
+                {showSpineer && <div className="d-flex justify-content-center my-5" >
+                    <Spinner animation="border" role="status" >
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                </div>}
+            </div>
         </div>
-
-    </div>
+    </>
 }
 
 export default Home;

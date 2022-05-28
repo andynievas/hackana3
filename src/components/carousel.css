@@ -1,0 +1,29 @@
+.carousel-image {
+  height: 30vh;
+  min-height: 30vw;
+  object-fit: cover;
+}
+
+.shadow-position {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.dark-shadow-inset {
+  box-shadow: 5rem 0 40px 0px var(--primaryColor) inset, -5rem 0 40px 0px var(--primaryColor) inset;
+}
+
+.only-one-line {
+  font-size: smaller;
+  line-height: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  /* number of lines to show */
+  line-clamp: 1;
+  -webkit-box-orient: vertical;
+}

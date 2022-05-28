@@ -1,0 +1,8 @@
+#backdrop-path {
+  background-size: cover;
+}
+
+#poster-path {
+  width: 400px;
+  padding: 100px 60px;
+}
