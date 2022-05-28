@@ -1,6 +1,7 @@
 
-import { Carousel } from "react-bootstrap";
 import "./carousel.css";
+import { Carousel } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function ({ movies }) {
 
@@ -14,16 +15,19 @@ export default function ({ movies }) {
         `https://image.tmdb.org/t/p/original${movie.poster_path}`
         : logo;
       return <Carousel.Item key={movie.id} >
-        <img
-          className="d-block w-100 carousel-image"
-          src={imgURL}
-          alt="First slide"
-        />
-        <div className="shadow-position dark-shadow-inset"></div>
-        <Carousel.Caption className="text-start" >
-          <h3>{movie.title}</h3>
-          <p className="only-one-line" >{movie.overview}</p>
-        </Carousel.Caption>
+        <Link to={`/movie/${movie.id}`} >
+          <img
+            className="d-block w-100 carousel-image"
+            src={imgURL}
+            alt="First slide"
+          />
+          <div className="shadow-position dark-shadow-inset"></div>
+          <Carousel.Caption className="text-start" >
+            <h3>{movie.title}</h3>
+            <p className="only-one-line" >{movie.overview}</p>
+          </Carousel.Caption>
+        </Link>
+
       </Carousel.Item>
     })}
   </Carousel>

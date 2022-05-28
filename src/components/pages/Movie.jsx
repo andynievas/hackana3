@@ -35,9 +35,12 @@ function Movie() {
 
         <div id="backdrop-path" style={{ backgroundImage: `url(${backgroundImgURL})` }} >
 
-            <div className="blur-sm" >
+            <div className="d-flex align-items-center blur-sm" >
                 <img id="poster-path" src={mainImgURL} alt={`Image of ${movie.title}`} />
-                <h3>{movie.title}</h3>
+                <div>
+                    <h3 className="py-3" >{movie.title}</h3>
+                    <p>{movie.overview}</p>
+                </div>
             </div>
 
         </div>

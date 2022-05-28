@@ -37,8 +37,9 @@ function App() {
         <Route path="/movie/:id" element={<Movie />} />
       </Routes>
 
-      <footer className="my-5 py-5" >
-        <p className="text-light text-center my-4" >© 2022 Hackflix Peliculas Online, Todos los derechos reservados.</p>
+      <footer className="my-4 py-5" >
+        <p className="text-light text-center" >© 2022 Hackana3 Peliculas Online - Todos los derechos reservados.</p>
+        <p className="text-light text-center" >by: <a href="https://linkedin.com/in/andy-nievas" target="_blank" >Andy Nievas</a></p>
       </footer>
 
     </div>
